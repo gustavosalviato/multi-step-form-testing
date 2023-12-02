@@ -35,7 +35,7 @@ export function ContactForm() {
       </fieldset>
 
       <footer className="flex justify-end">
-        <Button title="Next" type="submit" />
+        <Button title="Next" type="submit" variant="primary" />
       </footer>
     </form>
   )
