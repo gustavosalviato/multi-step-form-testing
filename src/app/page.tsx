@@ -4,9 +4,9 @@ import { InputText } from './InputText/index'
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-black px-4">
-      <form className="flex flex-col space-y-4 rounded-sm p-6 bg-white max-w-2xl w-full">
-        <h2 className="text-center items-center text-xl font-bold">Contact</h2>
+    <div className="flex items-center justify-center min-h-screen px-4">
+      <form className="flex flex-col space-y-4 rounded-sm p-6 bg-zinc-800 max-w-2xl w-full">
+        <h2 className="text-center items-center text-2xl font-bold">Contact</h2>
 
         <fieldset className="flex flex-col gap-1">
           <label htmlFor="firstName" className="text-sm">
