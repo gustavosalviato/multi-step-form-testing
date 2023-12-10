@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { FormContextProvider } from './context/FormContext'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="bg-zinc-900 text-zinc-50 antialiased">
-      <body>{children}</body>
+      <FormContextProvider>
+        <body>{children}</body>
+      </FormContextProvider>
     </html>
   )
 }
