@@ -3,7 +3,7 @@ import { InputText } from '../InputText/index'
 
 export function EducationForm() {
   return (
-    <form className="flex flex-col space-y-4 rounded-sm p-6 bg-zinc-800 max-w-2xl w-full">
+    <form className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 max-w-2xl w-full">
       <h2 className="text-center items-center text-2xl font-bold">Education</h2>
 
       <fieldset className="flex flex-col gap-1">
