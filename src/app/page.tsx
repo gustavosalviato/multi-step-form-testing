@@ -1,6 +1,6 @@
 'use client'
 
-import { ActiveForm } from '@/components/ActiveForm/index'
+import { ActiveForm } from '@/components/ActiveForm'
 
 export default function Home() {
   return (

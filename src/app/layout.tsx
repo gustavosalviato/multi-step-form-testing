@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
-import { FormContextProvider } from './context/FormContext'
 import './globals.css'
+import { FormContextProvider } from '@/context/FormContext'
 
 export const metadata: Metadata = {
   title: 'Multi Step Form Testing',

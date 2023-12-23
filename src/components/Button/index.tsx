@@ -21,7 +21,7 @@ export function Button({ title, icon: Icon, variant, ...props }: ButtonProps) {
       )}
     >
       {title}
-      {Icon && <Icon className="h-5 w-5" />}
+      {Icon && <Icon className="h-4 w-4" />}
     </button>
   )
 }

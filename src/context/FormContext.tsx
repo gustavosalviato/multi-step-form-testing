@@ -1,11 +1,22 @@
 'use client'
 
-import { createContext, ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from 'react'
+
+import { FormData } from '@/types/form-data'
 
 interface FormContextProps {
   step: number
   onNextStep(): void
   onPreviousStep(): void
+  formData: FormData
+  setFormData: Dispatch<SetStateAction<FormData>>
 }
 
 interface FormContextProviderProps {
@@ -15,6 +26,8 @@ interface FormContextProviderProps {
 export const FormContext = createContext({} as FormContextProps)
 
 export function FormContextProvider({ children }: FormContextProviderProps) {
+  const [formData, setFormData] = useState({} as FormData)
+
   const [step, setStep] = useState(1)
 
   function onNextStep() {
@@ -26,7 +39,9 @@ export function FormContextProvider({ children }: FormContextProviderProps) {
   }
 
   return (
-    <FormContext.Provider value={{ step, onNextStep, onPreviousStep }}>
+    <FormContext.Provider
+      value={{ step, onNextStep, onPreviousStep, formData, setFormData }}
+    >
       {children}
     </FormContext.Provider>
   )

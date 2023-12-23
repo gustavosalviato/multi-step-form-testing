@@ -1,10 +1,10 @@
 /* eslint-disable no-lone-blocks */
 'use client'
 
-import { UseFormContext } from '@/app/context/FormContext'
 import { ContactForm } from '../ContactForm/index'
 import { EducationForm } from '../EducationForm/index'
 import { BioForm } from '../BioForm/index'
+import { UseFormContext } from '@/context/FormContext'
 
 export function ActiveForm() {
   const { step } = UseFormContext()

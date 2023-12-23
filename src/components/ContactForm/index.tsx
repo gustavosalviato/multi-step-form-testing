@@ -1,41 +1,124 @@
-import { Button } from '../Button/index'
-import { InputText } from '../InputText/index'
+'use client'
+
+import { Button } from '../Button'
+import { InputText } from '../InputText'
+
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
+import { FieldErrorMessage } from '../FieldErrorMessage'
+
+import { ArrowRight } from 'lucide-react'
+import { UseFormContext } from '@/context/FormContext'
+
+const contactFormValidationSchema = z
+  .object({
+    firstName: z.string().min(3, {
+      message: 'first name is required.',
+    }),
+    lastName: z.string().min(3, {
+      message: 'first name is required.',
+    }),
+    password: z.string().min(6, {
+      message: 'password must be at least 6 characters.',
+    }),
+    confirmPassword: z.string().min(6, {
+      message: 'confirm password must be at least 6 characters',
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Senhas não conferem.',
+    path: ['confirmPassword'],
+  })
+
+type contactFormData = z.infer<typeof contactFormValidationSchema>
 
 export function ContactForm() {
+  const { onNextStep, setFormData } = UseFormContext()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<contactFormData>({
+    resolver: zodResolver(contactFormValidationSchema),
+  })
+
+  console.log(errors)
+
+  async function handleSubmitContactForm(data: contactFormData) {
+    const { firstName, lastName, password, confirmPassword } = data
+    setFormData({
+      firstName,
+      lastName,
+      password,
+      confirmPassword,
+    })
+
+    onNextStep()
+  }
   return (
-    <form className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 max-w-2xl w-full">
+    <form
+      onSubmit={handleSubmit(handleSubmitContactForm)}
+      className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 max-w-2xl w-full"
+    >
       <h2 className="text-center items-center text-2xl font-bold">Contact</h2>
 
       <fieldset className="flex flex-col gap-1">
         <label htmlFor="firstName" className="text-sm">
           First name
         </label>
-        <InputText id="firstName" />
+        <InputText id="firstName" {...register('firstName')} />
+
+        {errors.firstName && (
+          <FieldErrorMessage error={errors.firstName.message!} />
+        )}
       </fieldset>
 
       <fieldset className="flex flex-col gap-1">
         <label htmlFor="lastName" className="text-sm">
           Last name
         </label>
-        <InputText id="lastName" />
+        <InputText id="lastName" {...register('lastName')} />
+        {errors.lastName && (
+          <FieldErrorMessage error={errors.lastName.message!} />
+        )}
       </fieldset>
 
       <fieldset className="flex flex-col gap-1">
         <label htmlFor="password" className="text-sm">
           Password
         </label>
-        <InputText id="password" />
+        <InputText type="password" id="password" {...register('password')} />
+
+        {errors.password && (
+          <FieldErrorMessage error={errors.password.message!} />
+        )}
       </fieldset>
 
       <fieldset className="flex flex-col gap-1">
         <label htmlFor="confirmPassword" className="text-sm">
           Confirm password
         </label>
-        <InputText id="confirmPassword" />
+        <InputText
+          type="password"
+          id="confirmPassword"
+          {...register('confirmPassword', {
+            required: true,
+          })}
+        />
+        {errors.confirmPassword && (
+          <FieldErrorMessage error={errors.confirmPassword.message!} />
+        )}
       </fieldset>
 
       <footer className="flex justify-end">
-        <Button title="Next" type="submit" variant="primary" />
+        <Button
+          title="Next"
+          type="submit"
+          variant="primary"
+          disabled={isSubmitting}
+          icon={ArrowRight}
+        />
       </footer>
     </form>
   )
