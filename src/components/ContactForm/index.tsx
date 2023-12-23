@@ -43,8 +43,6 @@ export function ContactForm() {
     resolver: zodResolver(contactFormValidationSchema),
   })
 
-  console.log(errors)
-
   async function handleSubmitContactForm(data: contactFormData) {
     const { firstName, lastName, password, confirmPassword } = data
     setFormData({
