@@ -3,4 +3,6 @@ export interface FormData {
   lastName: string
   password: string
   confirmPassword: string
+  university: string
+  degree: string
 }

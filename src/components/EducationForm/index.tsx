@@ -33,6 +33,13 @@ export function EducationForm() {
   const { setFormData, onNextStep, onPreviousStep } = UseFormContext()
 
   async function handleSubmitEducationForm(data: educationFormData) {
+    const { degree, university } = data
+
+    setFormData((prevState) => ({
+      ...prevState,
+      university,
+      degree,
+    }))
     onNextStep()
   }
 
