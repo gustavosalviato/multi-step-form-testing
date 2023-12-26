@@ -55,7 +55,7 @@ export function ContactForm() {
     onNextStep()
   }
   return (
-    <div className="flex flex-col items-start w-full max-w-4xl mx-auto space-y-3">
+    <div className="flex flex-col items-start w-full max-w-2xl mx-auto space-y-3">
       <h2 className="text-3xl font-bold">Contact</h2>
       <p className="text-zinc-400">
         Complete your contact information to proceed to the next step.
