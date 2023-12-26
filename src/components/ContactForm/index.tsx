@@ -27,7 +27,7 @@ const contactFormValidationSchema = z
     }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: 'Senhas não conferem.',
+    message: 'passwords does not matches.',
     path: ['confirmPassword'],
   })
 
@@ -55,69 +55,74 @@ export function ContactForm() {
     onNextStep()
   }
   return (
-    <form
-      onSubmit={handleSubmit(handleSubmitContactForm)}
-      className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 max-w-2xl w-full"
-    >
-      <h2 className="text-center items-center text-2xl font-bold">Contact</h2>
+    <div className="flex flex-col items-start w-full max-w-4xl mx-auto space-y-3">
+      <h2 className="text-3xl font-bold">Contact</h2>
+      <p className="text-zinc-400">
+        Complete your contact information to proceed to the next step.
+      </p>
 
-      <fieldset className="flex flex-col gap-1">
-        <label htmlFor="firstName" className="text-sm">
-          First name
-        </label>
-        <InputText id="firstName" {...register('firstName')} />
+      <form
+        onSubmit={handleSubmit(handleSubmitContactForm)}
+        className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 w-full border border-zinc-600"
+      >
+        <fieldset className="flex flex-col gap-1">
+          <label htmlFor="firstName" className="text-base">
+            First name
+          </label>
+          <InputText id="firstName" {...register('firstName')} />
 
-        {errors.firstName && (
-          <FieldErrorMessage error={errors.firstName.message!} />
-        )}
-      </fieldset>
+          {errors.firstName && (
+            <FieldErrorMessage error={errors.firstName.message!} />
+          )}
+        </fieldset>
 
-      <fieldset className="flex flex-col gap-1">
-        <label htmlFor="lastName" className="text-sm">
-          Last name
-        </label>
-        <InputText id="lastName" {...register('lastName')} />
-        {errors.lastName && (
-          <FieldErrorMessage error={errors.lastName.message!} />
-        )}
-      </fieldset>
+        <fieldset className="flex flex-col gap-1">
+          <label htmlFor="lastName" className="text-base">
+            Last name
+          </label>
+          <InputText id="lastName" {...register('lastName')} />
+          {errors.lastName && (
+            <FieldErrorMessage error={errors.lastName.message!} />
+          )}
+        </fieldset>
 
-      <fieldset className="flex flex-col gap-1">
-        <label htmlFor="password" className="text-sm">
-          Password
-        </label>
-        <InputText type="password" id="password" {...register('password')} />
+        <fieldset className="flex flex-col gap-1">
+          <label htmlFor="password" className="text-base">
+            Password
+          </label>
+          <InputText type="password" id="password" {...register('password')} />
 
-        {errors.password && (
-          <FieldErrorMessage error={errors.password.message!} />
-        )}
-      </fieldset>
+          {errors.password && (
+            <FieldErrorMessage error={errors.password.message!} />
+          )}
+        </fieldset>
 
-      <fieldset className="flex flex-col gap-1">
-        <label htmlFor="confirmPassword" className="text-sm">
-          Confirm password
-        </label>
-        <InputText
-          type="password"
-          id="confirmPassword"
-          {...register('confirmPassword', {
-            required: true,
-          })}
-        />
-        {errors.confirmPassword && (
-          <FieldErrorMessage error={errors.confirmPassword.message!} />
-        )}
-      </fieldset>
+        <fieldset className="flex flex-col gap-1">
+          <label htmlFor="confirmPassword" className="text-base">
+            Confirm password
+          </label>
+          <InputText
+            type="password"
+            id="confirmPassword"
+            {...register('confirmPassword', {
+              required: true,
+            })}
+          />
+          {errors.confirmPassword && (
+            <FieldErrorMessage error={errors.confirmPassword.message!} />
+          )}
+        </fieldset>
 
-      <footer className="flex justify-end">
-        <Button
-          title="Next"
-          type="submit"
-          variant="primary"
-          disabled={isSubmitting}
-          icon={ArrowRight}
-        />
-      </footer>
-    </form>
+        <footer className="flex justify-end">
+          <Button
+            title="Next"
+            type="submit"
+            variant="primary"
+            disabled={isSubmitting}
+            icon={ArrowRight}
+          />
+        </footer>
+      </form>
+    </div>
   )
 }
