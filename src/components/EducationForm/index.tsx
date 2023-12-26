@@ -30,7 +30,7 @@ export function EducationForm() {
     resolver: zodResolver(educationFormValidationSchema),
   })
 
-  const { setFormData, onNextStep } = UseFormContext()
+  const { setFormData, onNextStep, onPreviousStep } = UseFormContext()
 
   async function handleSubmitEducationForm(data: educationFormData) {
     onNextStep()
@@ -64,14 +64,23 @@ export function EducationForm() {
           )}
         </fieldset>
 
-        <footer className="flex justify-end">
+        <div className="flex items-center gap-2 justify-end">
+          <Button
+            title="Previous"
+            type="button"
+            className="w-[7.5rem]"
+            variant="secondary"
+            onClick={onPreviousStep}
+          />
+
           <Button
             title="Next"
             type="submit"
+            className="w-[7.5rem]"
             variant="primary"
             disabled={isSubmitting}
           />
-        </footer>
+        </div>
       </form>
     </div>
   )

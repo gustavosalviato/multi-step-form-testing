@@ -8,7 +8,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { FieldErrorMessage } from '../FieldErrorMessage'
 
-import { ArrowRight } from 'lucide-react'
 import { UseFormContext } from '@/context/FormContext'
 
 const contactFormValidationSchema = z
@@ -113,15 +112,12 @@ export function ContactForm() {
           )}
         </fieldset>
 
-        <footer className="flex justify-end">
-          <Button
-            title="Next"
-            type="submit"
-            variant="primary"
-            disabled={isSubmitting}
-            icon={ArrowRight}
-          />
-        </footer>
+        <Button
+          title="Next"
+          type="submit"
+          variant="primary"
+          disabled={isSubmitting}
+        />
       </form>
     </div>
   )

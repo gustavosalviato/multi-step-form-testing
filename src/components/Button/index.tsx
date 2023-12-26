@@ -7,12 +7,19 @@ type ButtonProps = ComponentProps<'button'> & {
   variant: 'primary' | 'secondary'
 }
 
-export function Button({ title, icon: Icon, variant, ...props }: ButtonProps) {
+export function Button({
+  title,
+  icon: Icon,
+  variant,
+  className,
+  ...props
+}: ButtonProps) {
   return (
     <button
       {...props}
       className={clsx(
-        'flex items-center justify-center gap-2 px-4 h-9 font-bold rounded max-w-[7.5rem] w-full duration-300 transition-colors ',
+        'flex items-center justify-center gap-2 px-4 h-9 font-bold rounded w-full duration-300 transition-colors',
+        className,
         {
           'bg-teal-500 hover:bg-teal-700 text-zinc-800': variant === 'primary',
           'text-teal-500 hover:text-teal-700 hover:underline':
