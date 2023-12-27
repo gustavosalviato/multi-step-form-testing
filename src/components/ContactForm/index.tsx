@@ -18,6 +18,9 @@ const contactFormValidationSchema = z
     lastName: z.string().min(3, {
       message: 'first name is required.',
     }),
+    email: z.string().email({
+      message: 'field must be a valid email',
+    }),
     password: z.string().min(6, {
       message: 'password must be at least 6 characters.',
     }),
@@ -44,12 +47,13 @@ export function ContactForm() {
 
   async function handleSubmitContactForm(data: contactFormData) {
     const { firstName, lastName, password, confirmPassword } = data
-    setFormData({
+    setFormData((prevState) => ({
+      ...prevState,
       firstName,
       lastName,
       password,
       confirmPassword,
-    })
+    }))
 
     onNextStep()
   }
@@ -86,6 +90,14 @@ export function ContactForm() {
         </fieldset>
 
         <fieldset className="flex flex-col gap-1">
+          <label htmlFor="email" className="text-base">
+            Email
+          </label>
+          <InputText type="email" id="email" {...register('email')} />
+          {errors.email && <FieldErrorMessage error={errors.email.message!} />}
+        </fieldset>
+
+        <fieldset className="flex flex-col gap-1">
           <label htmlFor="password" className="text-base">
             Password
           </label>
@@ -103,9 +115,7 @@ export function ContactForm() {
           <InputText
             type="password"
             id="confirmPassword"
-            {...register('confirmPassword', {
-              required: true,
-            })}
+            {...register('confirmPassword')}
           />
           {errors.confirmPassword && (
             <FieldErrorMessage error={errors.confirmPassword.message!} />

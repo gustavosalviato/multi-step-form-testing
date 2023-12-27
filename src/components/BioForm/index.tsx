@@ -8,20 +8,24 @@ export function BioForm() {
   console.log(formData)
 
   return (
-    <form className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 max-w-2xl w-full">
-      <h2 className="text-center items-center text-2xl font-bold">About</h2>
+    <div className="flex flex-col items-start w-full max-w-2xl mx-auto space-y-3">
+      <h2 className="text-center items-center text-2xl font-bold">Address</h2>
+      <p className="text-zinc-400">
+        Complete your education information to proceed to the next step.
+      </p>
+      <form className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 w-full border border-zinc-600">
+        <fieldset className="flex flex-col gap-1">
+          <label htmlFor="aboutMe" className="text-sm">
+            About me
+          </label>
+          <InputText id="aboutMe" />
+        </fieldset>
 
-      <fieldset className="flex flex-col gap-1">
-        <label htmlFor="aboutMe" className="text-sm">
-          About me
-        </label>
-        <InputText id="aboutMe" />
-      </fieldset>
-
-      <footer className="flex justify-end gap-2">
-        <Button title="Previous" type="button" variant="secondary" />
-        <Button title="Next" type="submit" variant="primary" />
-      </footer>
-    </form>
+        {/* <footer className="flex justify-end gap-2">
+          <Button title="Previous" type="button" variant="secondary" />
+          <Button title="Next" type="submit" variant="primary" />
+        </footer> */}
+      </form>
+    </div>
   )
 }
