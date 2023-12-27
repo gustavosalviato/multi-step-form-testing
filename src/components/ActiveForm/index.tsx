@@ -1,9 +1,9 @@
 /* eslint-disable no-lone-blocks */
 'use client'
 
-import { ContactForm } from '../ContactForm/index'
-import { EducationForm } from '../EducationForm/index'
-import { BioForm } from '../BioForm/index'
+import { ContactForm } from '../ContactForm'
+import { EducationForm } from '../EducationForm'
+import { AddressForm } from '../AdressForm'
 import { UseFormContext } from '@/context/FormContext'
 
 export function ActiveForm() {
@@ -17,7 +17,7 @@ export function ActiveForm() {
       return <EducationForm />
       break
     case 3:
-      return <BioForm />
+      return <AddressForm />
 
     default:
       return null

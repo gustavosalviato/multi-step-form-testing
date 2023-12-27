@@ -5,4 +5,8 @@ export interface FormData {
   confirmPassword: string
   university: string
   course: string
+  city: string
+  state: string
+  neighbourhood: string
+  zipCode: string
 }
