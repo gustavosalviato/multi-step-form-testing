@@ -1,14 +1,12 @@
+import { FormEvent } from 'react'
 import { UseFormContext } from '@/context/FormContext'
 import { Button } from '../Button'
-import { FormEvent } from 'react'
 
 export function Informations() {
   const { formData, onPreviousStep } = UseFormContext()
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
-
-    onPreviousStep()
   }
 
   return (
@@ -27,7 +25,14 @@ export function Informations() {
           <code>{JSON.stringify(formData, null, 2)}</code>
         </pre>
 
-        <Button variant="primary" title="Finish" />
+        <div className="flex items-center justify-end">
+          <Button
+            onClick={onPreviousStep}
+            variant="secondary"
+            title="Previous"
+          />
+          <Button variant="primary" title="Finish" />
+        </div>
       </form>
     </div>
   )

@@ -36,21 +36,25 @@ const contactFormValidationSchema = z
 type contactFormData = z.infer<typeof contactFormValidationSchema>
 
 export function ContactForm() {
-  const { onNextStep, setFormData } = UseFormContext()
+  const { onNextStep, setFormData, formData } = UseFormContext()
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<contactFormData>({
     resolver: zodResolver(contactFormValidationSchema),
+    defaultValues: {
+      ...formData,
+    },
   })
 
   async function handleSubmitContactForm(data: contactFormData) {
-    const { firstName, lastName, password, confirmPassword } = data
+    const { firstName, lastName, email, password, confirmPassword } = data
     setFormData((prevState) => ({
       ...prevState,
       firstName,
       lastName,
+      email,
       password,
       confirmPassword,
     }))

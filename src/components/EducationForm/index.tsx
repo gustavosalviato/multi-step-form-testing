@@ -22,15 +22,18 @@ const educationFormValidationSchema = z.object({
 type educationFormData = z.infer<typeof educationFormValidationSchema>
 
 export function EducationForm() {
+  const { setFormData, onNextStep, onPreviousStep, formData } = UseFormContext()
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<educationFormData>({
     resolver: zodResolver(educationFormValidationSchema),
+    defaultValues: {
+      ...formData,
+    },
   })
-
-  const { setFormData, onNextStep, onPreviousStep } = UseFormContext()
 
   async function handleSubmitEducationForm(data: educationFormData) {
     const { course, university } = data

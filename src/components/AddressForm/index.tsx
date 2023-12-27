@@ -25,15 +25,18 @@ const addressFormValidationSchema = z.object({
 type addressFormData = z.infer<typeof addressFormValidationSchema>
 
 export function AddressForm() {
+  const { setFormData, onNextStep, onPreviousStep, formData } = UseFormContext()
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<addressFormData>({
     resolver: zodResolver(addressFormValidationSchema),
+    defaultValues: {
+      ...formData,
+    },
   })
-
-  const { setFormData, onNextStep, onPreviousStep } = UseFormContext()
 
   async function handleSubmitAddressForm(data: addressFormData) {
     const { city, state, neighbourhood, zipCode } = data
