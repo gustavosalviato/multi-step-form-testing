@@ -4,5 +4,5 @@ export interface FormData {
   password: string
   confirmPassword: string
   university: string
-  degree: string
+  course: string
 }

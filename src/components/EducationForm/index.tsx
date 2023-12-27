@@ -14,7 +14,7 @@ const educationFormValidationSchema = z.object({
   university: z.string().min(3, {
     message: 'university is required.',
   }),
-  degree: z.string().min(3, {
+  course: z.string().min(3, {
     message: 'degree is required.',
   }),
 })
@@ -33,12 +33,12 @@ export function EducationForm() {
   const { setFormData, onNextStep, onPreviousStep } = UseFormContext()
 
   async function handleSubmitEducationForm(data: educationFormData) {
-    const { degree, university } = data
+    const { course, university } = data
 
     setFormData((prevState) => ({
       ...prevState,
       university,
-      degree,
+      course,
     }))
     onNextStep()
   }
@@ -63,11 +63,11 @@ export function EducationForm() {
         </fieldset>
 
         <fieldset className="flex flex-col gap-1">
-          <label htmlFor="degree">Degree</label>
-          <InputText id="degree" {...register('degree')} />
+          <label htmlFor="degree">Course</label>
+          <InputText id="degree" {...register('course')} />
 
-          {errors.degree && (
-            <FieldErrorMessage error={errors.degree.message!} />
+          {errors.course && (
+            <FieldErrorMessage error={errors.course.message!} />
           )}
         </fieldset>
 
