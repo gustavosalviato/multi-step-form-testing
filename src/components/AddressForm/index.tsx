@@ -33,7 +33,7 @@ export function AddressForm() {
     resolver: zodResolver(addressFormValidationSchema),
   })
 
-  const { setFormData } = UseFormContext()
+  const { setFormData, onNextStep, onPreviousStep } = UseFormContext()
 
   async function handleSubmitAddressForm(data: addressFormData) {
     const { city, state, neighbourhood, zipCode } = data
@@ -45,6 +45,8 @@ export function AddressForm() {
       neighbourhood,
       zipCode,
     }))
+
+    onNextStep()
   }
 
   return (
@@ -87,12 +89,23 @@ export function AddressForm() {
           )}
         </fieldset>
 
-        <Button
-          type="submit"
-          variant="primary"
-          title="Send"
-          disabled={isSubmitting}
-        />
+        <div className="flex items-center gap-2 justify-end">
+          <Button
+            title="Previous"
+            type="button"
+            className="w-[7.5rem]"
+            variant="secondary"
+            onClick={onPreviousStep}
+          />
+
+          <Button
+            title="Next"
+            type="submit"
+            className="w-[7.5rem]"
+            variant="primary"
+            disabled={isSubmitting}
+          />
+        </div>
       </form>
     </div>
   )

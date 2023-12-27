@@ -3,8 +3,9 @@
 
 import { ContactForm } from '../ContactForm'
 import { EducationForm } from '../EducationForm'
-import { AddressForm } from '../AdressForm'
+import { AddressForm } from '../AddressForm'
 import { UseFormContext } from '@/context/FormContext'
+import { Informations } from '../Informations'
 
 export function ActiveForm() {
   const { step } = UseFormContext()
@@ -18,6 +19,8 @@ export function ActiveForm() {
       break
     case 3:
       return <AddressForm />
+    case 4:
+      return <Informations />
 
     default:
       return null
