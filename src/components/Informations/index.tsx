@@ -4,10 +4,14 @@ import { Button } from '../Button'
 import { MultiStep } from '../MultiStep'
 
 export function Informations() {
-  const { formData, onPreviousStep, step } = UseFormContext()
+  const { formData, onPreviousStep, step, changeStep, setFormData } =
+    UseFormContext()
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
+
+    setFormData({} as any)
+    changeStep(1)
   }
 
   return (

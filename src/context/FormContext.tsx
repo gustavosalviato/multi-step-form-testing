@@ -17,6 +17,7 @@ interface FormContextProps {
   onPreviousStep(): void
   formData: FormData
   setFormData: Dispatch<SetStateAction<FormData>>
+  changeStep(step: number): void
 }
 
 interface FormContextProviderProps {
@@ -30,6 +31,10 @@ export function FormContextProvider({ children }: FormContextProviderProps) {
 
   const [step, setStep] = useState(1)
 
+  function changeStep(step: number) {
+    setStep(step)
+  }
+
   function onNextStep() {
     setStep((prevState) => prevState + 1)
   }
@@ -40,7 +45,14 @@ export function FormContextProvider({ children }: FormContextProviderProps) {
 
   return (
     <FormContext.Provider
-      value={{ step, onNextStep, onPreviousStep, formData, setFormData }}
+      value={{
+        step,
+        onNextStep,
+        onPreviousStep,
+        formData,
+        setFormData,
+        changeStep,
+      }}
     >
       {children}
     </FormContext.Provider>
