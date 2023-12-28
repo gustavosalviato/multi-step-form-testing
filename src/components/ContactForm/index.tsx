@@ -9,6 +9,7 @@ import { z } from 'zod'
 import { FieldErrorMessage } from '../FieldErrorMessage'
 
 import { UseFormContext } from '@/context/FormContext'
+import { MultiStep } from '../MultiStep'
 
 const contactFormValidationSchema = z
   .object({
@@ -36,7 +37,7 @@ const contactFormValidationSchema = z
 type contactFormData = z.infer<typeof contactFormValidationSchema>
 
 export function ContactForm() {
-  const { onNextStep, setFormData, formData } = UseFormContext()
+  const { onNextStep, setFormData, formData, step } = UseFormContext()
   const {
     register,
     handleSubmit,
@@ -67,7 +68,7 @@ export function ContactForm() {
       <p className="text-zinc-400">
         Complete your contact information to proceed to the next step.
       </p>
-
+      <MultiStep currentStep={step} />
       <form
         onSubmit={handleSubmit(handleSubmitContactForm)}
         className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 w-full border border-zinc-600"

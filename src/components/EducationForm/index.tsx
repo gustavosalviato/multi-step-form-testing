@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FieldErrorMessage } from '../FieldErrorMessage'
 import { UseFormContext } from '@/context/FormContext'
+import { MultiStep } from '../MultiStep'
 
 const educationFormValidationSchema = z.object({
   university: z.string().min(3, {
@@ -22,7 +23,8 @@ const educationFormValidationSchema = z.object({
 type educationFormData = z.infer<typeof educationFormValidationSchema>
 
 export function EducationForm() {
-  const { setFormData, onNextStep, onPreviousStep, formData } = UseFormContext()
+  const { setFormData, onNextStep, onPreviousStep, formData, step } =
+    UseFormContext()
 
   const {
     register,
@@ -52,6 +54,8 @@ export function EducationForm() {
       <p className="text-zinc-400">
         Complete your education information to proceed to the next step.
       </p>
+
+      <MultiStep currentStep={step} />
       <form
         onSubmit={handleSubmit(handleSubmitEducationForm)}
         className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 w-full border border-zinc-600"

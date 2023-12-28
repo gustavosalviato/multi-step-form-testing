@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FieldErrorMessage } from '../FieldErrorMessage'
+import { MultiStep } from '../MultiStep'
 
 const addressFormValidationSchema = z.object({
   city: z.string().min(3, {
@@ -25,7 +26,8 @@ const addressFormValidationSchema = z.object({
 type addressFormData = z.infer<typeof addressFormValidationSchema>
 
 export function AddressForm() {
-  const { setFormData, onNextStep, onPreviousStep, formData } = UseFormContext()
+  const { setFormData, onNextStep, onPreviousStep, formData, step } =
+    UseFormContext()
 
   const {
     register,
@@ -58,6 +60,8 @@ export function AddressForm() {
       <p className="text-zinc-400">
         Complete your education information to proceed to the next step.
       </p>
+
+      <MultiStep currentStep={step} />
       <form
         onSubmit={handleSubmit(handleSubmitAddressForm)}
         className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 w-full border border-zinc-600"

@@ -1,9 +1,10 @@
 import { FormEvent } from 'react'
 import { UseFormContext } from '@/context/FormContext'
 import { Button } from '../Button'
+import { MultiStep } from '../MultiStep'
 
 export function Informations() {
-  const { formData, onPreviousStep } = UseFormContext()
+  const { formData, onPreviousStep, step } = UseFormContext()
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -17,6 +18,9 @@ export function Informations() {
       <p className="text-zinc-400">
         You can view all the information you provide at each step here.
       </p>
+
+      <MultiStep currentStep={step} />
+
       <form
         onSubmit={handleSubmit}
         className="flex flex-col space-y-4 rounded-md p-6 bg-zinc-800 w-full border border-zinc-600"
