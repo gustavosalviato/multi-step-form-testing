@@ -1,18 +1,18 @@
 /* eslint-disable no-lone-blocks */
 'use client'
 
-import { ContactForm } from '../ContactForm'
 import { EducationForm } from '../EducationForm'
 import { AddressForm } from '../AddressForm'
 import { UseFormContext } from '@/context/FormContext'
 import { Informations } from '../Informations'
+import { ContactFormContainer } from '../ContactFormContainer'
 
 export function ActiveForm() {
   const { step } = UseFormContext()
 
   switch (step) {
     case 1:
-      return <ContactForm />
+      return <ContactFormContainer />
       break
     case 2:
       return <EducationForm />
