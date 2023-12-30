@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+
 import { Step } from './Step'
 
 interface MultiStepProps {
@@ -6,17 +8,20 @@ interface MultiStepProps {
 }
 
 export function MultiStep({ currentStep = 2, size = 4 }: MultiStepProps) {
-  const sizeToString = size.toString()
-
   return (
     <div className="w-full">
       <span className="text-sm text-zinc-400">{`Step ${currentStep} of ${size}`}</span>
 
-      <div className={`grid grid-cols-${sizeToString} gap-2 mt-2`}>
+      <ul
+        className={clsx('grid gap-2 mt-2', {
+          'grid-cols-4': size === 4,
+          'grid-cols-3': size === 3,
+        })}
+      >
         {Array.from({ length: size }, (_, i) => i + 1).map((step) => {
           return <Step key={step} active={currentStep >= step} />
         })}
-      </div>
+      </ul>
     </div>
   )
 }
